@@ -5,8 +5,19 @@ angular.module('app').controller('ProfileController', [
 
   function($scope,$http, User){
 
-   User.getUser().then(function(data){
-      $scope.alls = data;
+
+  $scope.getArtist = function(name, type){
+      $http({
+        method: 'GET',
+        url: '/v1/search',
+        params: {q: name, type: type}
+      }).success(function(searchData){
+          $scope.search = searchData;
+      });
+  }
+  $scope.types = [{name: 'artist'}, {name: 'album'}, {name: 'track'}]
+
+    User.getUser().then(function(data){
       $scope.username = data.displayName;
       $scope.photo    = data.photos[0];
     });

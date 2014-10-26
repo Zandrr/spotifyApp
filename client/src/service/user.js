@@ -10,7 +10,6 @@ angular.module('app').service('User', [
         method: 'GET',
         url: '/v1/me'
       }).then(function(user){
-        console.log('hi');
         deferred.resolve(user.data);
       });
       return deferred.promise;

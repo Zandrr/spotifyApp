@@ -1,4 +1,5 @@
-var passport = require('passport');
+var passport = require('passport'),
+    request  = require('request');
 module.exports = function(app) {
 
 
@@ -20,6 +21,15 @@ app.get('/v1/me', function(req, res){
   } else {
     res.send(401);
   }
+});
+
+app.get('/v1/search', function(req, res){
+  request({url: "https://api.spotify.com/v1/search", qs: {q: req.query.q, type: req.query.type} },
+      function(err, response, body){
+        if(!err && res.statusCode == 200) {
+          res.send(body);
+        }
+      });
 });
 
 //App Routes
