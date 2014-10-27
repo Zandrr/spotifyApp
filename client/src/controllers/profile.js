@@ -11,10 +11,31 @@ angular.module('app').controller('ProfileController', [
         method: 'GET',
         url: '/v1/search',
         params: {q: name, type: type}
-      }).success(function(searchData){
-          $scope.search = searchData;
-      });
+      }).then(function(searchData){
+        $http({
+          method: 'GET',
+          url: 'https://api.spotify.com/v1/artists/' + searchData.data.artists.items[0].id + '/related-artists'
+        }).then(function(theData){
+            (function getRelated(){
+              var related = [];
+              for (var i = 0; i < 20; i++){
+                related.push(theData.data.artists[i]);
+              }
+              $scope.allRelated = related;
+            })()
+          });
+        });
   }
+
+  $scope.getRelated = function(artistId){
+    $http({
+      method: 'GET',
+      url: 'https://api.spotify.com/v1/artists/' + '/related-artists'
+    }).then(function(theData){
+      $scope.testing = theData;
+    });
+  }
+
   $scope.types = [{name: 'artist'}, {name: 'album'}, {name: 'track'}]
 
     User.getUser().then(function(data){

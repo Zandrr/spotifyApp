@@ -10,5 +10,6 @@
 <select ng-model="type" ng-options="type.name for type in types"></select>
 <br>
 <button type="submit" class="btn btn-primary" ng-click="getArtist(query, type.name)">click</button>
-
-{{search}}
+<div ng-repeat="x in allRelated">
+{{x.name}}
+</div>
