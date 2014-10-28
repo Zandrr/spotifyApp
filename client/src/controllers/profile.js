@@ -24,7 +24,6 @@ angular.module('app').controller('ProfileController', [
                   url: 'https://api.spotify.com/v1/artists/'+ theData.data.artists[i].id + '/top-tracks',
                   params: {country: 'SE'}
                 }).then(function(topTracks){
-                  console.log("top track 1 "+ topTracks.data.tracks[0]);
                     related.push(topTracks.data.tracks[0]);
                 })
               }
