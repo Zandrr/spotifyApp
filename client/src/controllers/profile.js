@@ -19,21 +19,19 @@ angular.module('app').controller('ProfileController', [
             (function getRelated(){
               var related = [];
               for (var i = 0; i < 20; i++){
-                related.push(theData.data.artists[i]);
+                $http({
+                  method: 'GET',
+                  url: 'https://api.spotify.com/v1/artists/'+ theData.data.artists[i].id + '/top-tracks',
+                  params: {country: 'SE'}
+                }).then(function(topTracks){
+                  console.log("top track 1 "+ topTracks.data.tracks[0]);
+                    related.push(topTracks.data.tracks[0]);
+                })
               }
               $scope.allRelated = related;
             })()
           });
         });
-  }
-
-  $scope.getRelated = function(artistId){
-    $http({
-      method: 'GET',
-      url: 'https://api.spotify.com/v1/artists/' + '/related-artists'
-    }).then(function(theData){
-      $scope.testing = theData;
-    });
   }
 
   $scope.types = [{name: 'artist'}, {name: 'album'}, {name: 'track'}]
@@ -44,3 +42,7 @@ angular.module('app').controller('ProfileController', [
     });
   }
 ]);
+
+
+
+// theData.data.artists[i]

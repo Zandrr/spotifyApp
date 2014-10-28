@@ -11,5 +11,5 @@
 <br>
 <button type="submit" class="btn btn-primary" ng-click="getArtist(query, type.name)">click</button>
 <div ng-repeat="x in allRelated">
-{{x.name}}
+<a href="{{x.external_urls.spotify}}" target="_blank">{{x.name}}</a>
 </div>
