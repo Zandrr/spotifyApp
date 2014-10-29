@@ -1,9 +1,10 @@
 angular.module('app').controller('ProfileController', [
   '$scope',
   '$http',
+  '$firebase',
   'User',
 
-  function($scope,$http, User){
+  function($scope,$http, $firebase, User){
 
 
   $scope.getArtist = function(name, type){
