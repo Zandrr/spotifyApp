@@ -11,10 +11,10 @@ fs.realpath(__dirname + '/../', function (err, projectRoot) {
       passport;
 
 
-  app.set('port', process.env.PORT || 8888);
+  app.set('port', process.env.PORT || 5000);
   app.set('views', projectRoot + '/server/views');
   app.set('view engine', 'jade');
-  
+
   passport = require('./passport').init(app);
 
   app.use(require('serve-static')(projectRoot + '/client/vendor'));
