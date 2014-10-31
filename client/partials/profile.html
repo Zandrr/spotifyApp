@@ -1,15 +1,27 @@
-<h1>{{username}}</h1>
-<br>
-<img src="{{photo}}">
 
+<div class="container" ng-app="app">
+  <h1>Welcome, {{username}}</h1>
+  <br>
+<img src="{{photo}}" class="img-circle">
+
+  <br>
+  <h3>Search for an artist:</h3>
+  <input type="text" ng-model="query" />
+  <br>
+  <!-- <h3>Type?</h3>
+  <select ng-model="type" ng-options="type.name for type in types"></select> -->
+  <br>
+<button type="submit" class="btn btn-primary" ng-click="getArtist(query, 'artist')">Suggest!</button>
 <br>
-<h3>Search:</h3>
-<input type="text" ng-model="query" />
-<br>
-<h3>Type?</h3>
-<select ng-model="type" ng-options="type.name for type in types"></select>
-<br>
-<button type="submit" class="btn btn-primary" ng-click="getArtist(query, type.name)">click</button>
-<div ng-repeat="x in allRelated">
-<a href="{{x.external_urls.spotify}}" target="_blank">{{x.name}}</a>
+<h4>Filter:</h5><input type="text" ng-model="searchText.$">
+    <table class="table table-striped">
+      <thead>
+        <th>Song</th>
+        <th>Artist</th>
+      </thead>
+      <tr ng-repeat="x in allRelated | filter:searchText">
+        <td><a href="{{x.external_urls.spotify}}" target="_blank">{{x.name}}</a></td>
+        <td><a href="{{ x.artists[0].external_urls.spotify}}" target="_blank">{{ x.artists[0].name}}</a></td>
+      </tr>
+    </table>     
 </div>
